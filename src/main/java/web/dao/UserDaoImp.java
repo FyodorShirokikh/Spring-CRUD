@@ -12,7 +12,6 @@ public class UserDaoImp implements UserDao {
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager entityManager;
     @Override
-    @Transactional
     public void add(User user) {
         entityManager.persist(user);
     }
@@ -25,13 +24,11 @@ public class UserDaoImp implements UserDao {
         return entityManager.createQuery("from User").getResultList();
     }
     @Override
-    @Transactional
     public void delete(int id) {
         User tempUser = entityManager.find(User.class, id);
         entityManager.remove(tempUser);
     }
     @Override
-    @Transactional
     public void edit(int id, User user) {
         User tempUser = entityManager.find(User.class, id);
         tempUser.setId(user.getId());
